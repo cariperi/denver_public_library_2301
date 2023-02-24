@@ -70,7 +70,7 @@ describe Library do
       @library.add_author(@charlotte_bronte)
     end
 
-    it 'checks a book out from the library' do
+    it 'can check out a book out from the library' do
       @library.check_out(@jane_eyre)
 
       expect(@library.current_loans).to eq([@jane_eyre])
@@ -82,6 +82,13 @@ describe Library do
       @library.check_out(@hamlet)
 
       expect(@library.current_loans).to eq([])
+    end
+
+    it 'returns an error and does nothing if the book is currently checked out' do
+      @library.check_out(@jane_eyre)
+
+      expect(@library.check_out(@jane_eyre)).to eq('This book is already checked out!')
+      expect(@library.current_loans).to eq([@jane_eyre])
     end
   end
 
@@ -114,9 +121,22 @@ describe Library do
     end
 
     it 'returns the book that has been checked out the most times' do
-      2.times{@library.check_out(@hamlet)}
-      3.times{@library.check_out(@jane_eyre)}
-      4.times{@library.check_out(@villette)}
+      @library.check_out(@hamlet)
+      @library.check_out(@jane_eyre)
+      @library.check_out(@villette)
+
+      @library.return(@hamlet)
+      @library.return(@jane_eyre)
+      @library.return(@villette)
+
+      @library.check_out(@jane_eyre)
+      @library.check_out(@villette)
+
+      @library.return(@jane_eyre)
+      @library.return(@villette)
+
+      @library.check_out(@villette)
+      @library.return(@villette)
 
       expect(@library.most_popular_book).to eq(@villette)
     end
