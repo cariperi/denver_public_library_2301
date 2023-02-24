@@ -100,5 +100,10 @@ describe Library do
       expect(@library.current_loans).to include(@villette)
       expect(@library.current_loans).to_not include(@jane_eyre)
     end
+
+    it 'returns an error and does nothing if the book is not checked out' do
+      expect(@library.return(@hamlet)).to eq('Nobody has checked out this book!')
+      expect(@library.current_loans).to eq([@jane_eyre, @villette])
+    end
   end
 end
