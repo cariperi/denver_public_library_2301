@@ -23,6 +23,7 @@ class Library
 
   def check_out(book)
     return 'Sorry, we do not have this book.' if !@books.include?(book)
+    return 'This book is already checked out!' if @current_loans.include?(book)
     book.checkout_count += 1
     @current_loans << book
   end
