@@ -24,5 +24,9 @@ describe Book do
     it 'has a publication year' do
       expect(@book.publication_year).to eq('1960')
     end
+
+    it 'has a checkout count that starts at zero' do
+      expect(@book.checkout_count).to eq(0)
+    end
   end
 end
