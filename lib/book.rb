@@ -1,8 +1,9 @@
 class Book
+  attr_accessor :checkout_count
+
   attr_reader :title,
               :author,
-              :publication_year,
-              :checkout_count
+              :publication_year
 
   def initialize(details)
     @title = details[:title]
