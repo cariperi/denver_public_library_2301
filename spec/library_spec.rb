@@ -13,5 +13,13 @@ describe Library do
     it 'has a name' do
       expect(@library.name).to eq('Turing Library')
     end
+
+    it 'has a list of books which is empty by default' do
+      expect(@library.books).to eq([])
+    end
+
+    it 'has a list of authors which is empty by default' do
+      expect(@library.authors).to eq([])
+    end
   end
 end
