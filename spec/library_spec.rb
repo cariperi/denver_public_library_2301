@@ -84,4 +84,21 @@ describe Library do
       expect(@library.current_loans).to eq([])
     end
   end
+
+  describe '#return' do
+    before(:each) do
+      @library.add_author(@charlotte_bronte)
+      @library.check_out(@jane_eyre)
+      @library.check_out(@villette)
+    end
+
+    it 'returns the book to the library' do
+      expect(@library.current_loans).to eq([@jane_eyre, @villette])
+
+      @library.return(@jane_eyre)
+
+      expect(@library.current_loans).to include(@villette)
+      expect(@library.current_loans).to_not include(@jane_eyre)
+    end
+  end
 end
