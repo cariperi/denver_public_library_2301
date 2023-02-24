@@ -25,4 +25,8 @@ class Library
     return 'Sorry, we do not have this book.' if !@books.include?(book)
     @current_loans << book
   end
+
+  def return(book)
+    @current_loans.delete(book)
+  end
 end
