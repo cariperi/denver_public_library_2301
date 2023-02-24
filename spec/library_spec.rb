@@ -106,4 +106,19 @@ describe Library do
       expect(@library.current_loans).to eq([@jane_eyre, @villette])
     end
   end
+
+  describe '#most_popular_book' do
+    before(:each) do
+      @library.add_author(@charlotte_bronte)
+      @library.add_author(@shakespeare)
+    end
+
+    it 'returns the book that has been checked out the most times' do
+      2.times{@library.check_out(@hamlet)}
+      3.times{@library.check_out(@jane_eyre)}
+      4.times{@library.check_out(@villette)}
+
+      expect(@library.most_popular_book).to eq(@villette)
+    end
+  end
 end
