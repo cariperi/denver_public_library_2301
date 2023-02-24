@@ -23,11 +23,20 @@ class Library
 
   def check_out(book)
     return 'Sorry, we do not have this book.' if !@books.include?(book)
+    book.checkout_count += 1
     @current_loans << book
   end
 
   def return(book)
     return 'Nobody has checked out this book!' if !@current_loans.include?(book)
     @current_loans.delete(book)
+  end
+
+  def most_popular_book
+    most_popular_book = @books[0]
+    @books.each do |book|
+      most_popular_book = book if book.checkout_count > most_popular_book.checkout_count
+    end
+    most_popular_book
   end
 end
