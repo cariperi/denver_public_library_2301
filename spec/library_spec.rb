@@ -3,10 +3,13 @@ require_relative 'spec_helper'
 describe Library do
   before(:each) do
     @library = Library.new('Turing Library')
+    @shakespeare = Author.new({first_name: "William",
+                                last_name: "Shakespeare"})
     @charlotte_bronte = Author.new({first_name: "Charlotte",
                                     last_name: "Bronte"})
     @jane_eyre = @charlotte_bronte.write("Jane Eyre", "October 16, 1847")
     @villette = @charlotte_bronte.write("Villette", "1853")
+    @hamlet = @shakespeare.write("Hamlet", "1603")
   end
 
   describe '#initialize' do
@@ -24,6 +27,10 @@ describe Library do
 
     it 'has a list of authors which is empty by default' do
       expect(@library.authors).to eq([])
+    end
+
+    it 'has a list of books currently checked out which is empty by default' do
+      expect(@library.current_loans).to eq([])
     end
   end
 
@@ -55,6 +62,26 @@ describe Library do
       expect(@time_frame.values.count).to eq(2)
       expect(@time_frame[:start]).to eq('1847')
       expect(@time_frame[:end]).to eq('1853')
+    end
+  end
+
+  describe '#check_out' do
+    before(:each) do
+      @library.add_author(@charlotte_bronte)
+    end
+
+    it 'checks a book out from the library' do
+      @library.check_out(@jane_eyre)
+
+      expect(@library.current_loans).to eq([@jane_eyre])
+    end
+
+    it 'returns an error and does nothing if the book is not in the collection' do
+      expect(@library.check_out(@hamlet)).to eq('Sorry, we do not have this book.')
+
+      @library.check_out(@hamlet)
+
+      expect(@library.current_loans).to eq([])
     end
   end
 end

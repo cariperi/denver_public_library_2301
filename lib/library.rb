@@ -1,12 +1,14 @@
 class Library
   attr_reader :name,
               :books,
-              :authors
+              :authors,
+              :current_loans
 
   def initialize(name)
     @name = name
     @books = []
     @authors = []
+    @current_loans = []
   end
 
   def add_author(author)
