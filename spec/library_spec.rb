@@ -19,6 +19,7 @@ describe Library do
 
     it 'has a name' do
       expect(@library.name).to eq('Turing Library')
+      expect(@library.name).to be_a String
     end
 
     it 'has a list of books which is empty by default' do
