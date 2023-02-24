@@ -27,6 +27,7 @@ class Library
   end
 
   def return(book)
+    return 'Nobody has checked out this book!' if !@current_loans.include?(book)
     @current_loans.delete(book)
   end
 end
