@@ -38,4 +38,23 @@ describe Library do
         expect(@library.books).to eq([@jane_eyre, @villette])
       end
   end
+
+  describe '#publication_time_frame_for' do
+    before(:each) do
+      @library.add_author(@charlotte_bronte)
+      @time_frame = @library.publication_time_frame_for(@charlotte_bronte)
+    end
+
+    it 'returns a hash with a start year and end year keys' do
+      expect(@time_frame).to be_a Hash
+      expect(@time_frame.count).to eq(2)
+      expect(@time_frame.keys).to eq([:start, :end])
+    end
+
+    it 'returns the pub year of the authors first and last books as values' do
+      expect(@time_frame.values.count).to eq(2)
+      expect(@time_frame[:start]).to eq('1847')
+      expect(@time_frame[:end]).to eq('1853')
+    end
+  end
 end
