@@ -15,7 +15,7 @@ describe Author do
       expect(@charlotte_bronte.name).to eq('Charlotte Bronte')
     end
 
-    it 'starts iwth no books by default' do
+    it 'starts with no books by default' do
       expect(@charlotte_bronte.books).to eq([])
     end
   end
@@ -27,8 +27,8 @@ describe Author do
     end
 
     it 'creates and returns books' do
-      expect(@jane_eyre.class).to be_a Book
-      expect(@villette.class).to be_a Book
+      expect(@jane_eyre.class).to eq(Book)
+      expect(@villette.class).to eq(Book)
     end
 
     it 'assigns attributes to book objects' do
