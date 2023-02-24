@@ -34,10 +34,7 @@ class Library
   end
 
   def most_popular_book
-    most_popular_book = @books[0]
-    @books.each do |book|
-      most_popular_book = book if book.checkout_count > most_popular_book.checkout_count
-    end
-    most_popular_book
+    max_count = @books.map {|book| book.checkout_count}.max
+    @books.find {|book| book.checkout_count == max_count}
   end
 end
